@@ -1,42 +1,45 @@
-# iriacode — distribución
+# iriacode
 
-Canal **público de distribución** de **iriacode**, el generador open-source (Apache-2.0)
-del ecosistema coherente de IA (reglas, agentes, skills, mcps y arneses) para Claude,
-GitHub Copilot, Codex, Gemini y Cursor.
+Generador open-source (Apache-2.0) del ecosistema coherente de IA para **Claude, GitHub
+Copilot, Codex, Gemini y Cursor**. Autoalojado, sin telemetría, solo necesita **Python 3.9+**.
 
-> El **código fuente y su histórico** se desarrollan en un repositorio privado de Plexus.
-> Este repositorio existe **solo para distribuir las releases** (instalador + wheel), de
-> forma que cualquiera pueda instalarlo sin acceso al repo de código.
+## Instalar (copia y pega)
 
-## Instalar
-
-Descarga el instalador de la última **Release** (pestaña *Releases*) y ejecútalo
-(macOS/Linux):
-
+**macOS / Linux:**
 ```sh
-chmod +x iriacode-*-installer.sh
-./iriacode-*-installer.sh        # instala (pip --user) + setup --global (configura tus CLIs)
+curl -fsSLO https://github.com/carloslozanosotoplexus/iriacode-dist/releases/download/v0.9.1/iriacode-0.9.1-installer.sh
+chmod +x iriacode-0.9.1-installer.sh
+./iriacode-0.9.1-installer.sh
+export PATH="$HOME/.local/bin:$PATH"
 iriacode setup --global
 iriacode welcome
 ```
 
-Windows: usa `iriacode-*-installer.ps1`.
-
-Requisito único: **Python 3.9+** (sin Node). El instalador es autocontenido (lleva el
-wheel embebido) y no necesita este repo ni red.
-
-## Verificar integridad
-
-Cada Release incluye el SHA-256 del instalador en su descripción. Comprueba:
-
-```sh
-shasum -a 256 iriacode-<version>-installer.sh
+**Windows (PowerShell):**
+```powershell
+Invoke-WebRequest -Uri https://github.com/carloslozanosotoplexus/iriacode-dist/releases/download/v0.9.1/iriacode-0.9.1-installer.ps1 -OutFile iriacode-0.9.1-installer.ps1
+.\iriacode-0.9.1-installer.ps1
+iriacode setup --global
+iriacode welcome
 ```
 
-## Qué hace iriacode
+Eso instala el CLI y **configura solos** todos tus CLIs de IA. No necesitas clonar este repo
+ni tener cuenta: el instalador es autocontenido (lleva el wheel embebido).
 
-`iriacode setup --global` materializa la conducta (4 reglas), skills (estándar
-agentskills.io), hooks de enforcement (nativos en Claude) y los bloques de instrucciones
-para cada CLI. Es autoalojado y **sin telemetría**: todo el estado vive en `~/.iriacode`.
+## Comprobar que funciona
+```sh
+iriacode version        # iriacode 0.9.1
+iriacode harness audit  # CLIs cubiertos
+```
 
-Licencia: **Apache-2.0**.
+## Verificar integridad (opcional)
+```sh
+shasum -a 256 iriacode-0.9.1-installer.sh
+# debe coincidir con el SHA-256 indicado en la Release v0.9.1
+```
+
+---
+
+- **Releases / versiones:** pestaña *Releases* de este repo.
+- Este repo es **solo el canal de distribución**; el código y su histórico se desarrollan en un repositorio privado de Plexus.
+- Licencia: **Apache-2.0**.
